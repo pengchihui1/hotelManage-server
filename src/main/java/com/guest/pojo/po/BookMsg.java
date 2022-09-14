@@ -28,6 +28,17 @@ public class BookMsg extends Model<BookMsg> {
 	@TableId(value = "id")
 	private Integer id;
 
+	public BookMsg(int i, Timestamp timestamp, Timestamp timestamp2, String idCard, String rank2, int j,
+			Object object) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "BookMsg [id=" + id + ", fromTime=" + fromTime + ", toTime=" + toTime + ", guestIdCard=" + guestIdCard
+				+ ", rank=" + rank + ", state=" + state + ", resultRoom=" + resultRoom + "]";
+	}
+
 	/**
 	 * 预计入住时间
 	 */
@@ -58,39 +69,9 @@ public class BookMsg extends Model<BookMsg> {
 	 */
 	private String resultRoom;
 
-	public BookMsg(int i, Timestamp timestamp, Timestamp timestamp2, String idCard, String rank2, int j,
-			Object object) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getResultRoom() {
+	public Object getResultRoom() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void setFromTime(Timestamp timestamp) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setRank(String rank2) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setState(int i) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setToTime(Timestamp timestamp) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setResultRoom(String string) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public Timestamp getFromTime() {
@@ -103,14 +84,39 @@ public class BookMsg extends Model<BookMsg> {
 		return null;
 	}
 
+	public int getState() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public Object getGuestIdCard() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int getState() {
+	public void setState(int i) {
 		// TODO Auto-generated method stub
-		return 0;
+
+	}
+
+	public void setResultRoom(String roomId) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setFromTime(Timestamp timestamp) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setRank(String rank2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setToTime(Timestamp timestamp) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

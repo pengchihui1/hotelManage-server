@@ -31,6 +31,18 @@ public class RoomMsg {
 	 */
 	private String rank;
 
+	public RoomMsg(String roomId2, Object size2, Object rank2, int rent2, int earnest2, Object maxNum2,
+			Object position2, int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "RoomMsg [roomId=" + roomId + ", size=" + size + ", rank=" + rank + ", rent=" + rent + ", earnest="
+				+ earnest + ", maxNum=" + maxNum + ", position=" + position + ", state=" + state + ", time=" + time
+				+ "]";
+	}
+
 	/**
 	 * 租金，单位是人民币元
 	 */
@@ -46,19 +58,6 @@ public class RoomMsg {
 	 */
 	private Integer maxNum;
 
-	public RoomMsg(String roomId2, Object size2, Object rank2, Object rent2, int earnest2, int maxNum2,
-			Object position2, int i, String string) {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "RoomMsg [earnest=" + earnest + ", maxNum=" + maxNum + ", position=" + position + ", rank=" + rank
-				+ ", rent=" + rent + ", roomId=" + roomId + ", size=" + size + ", state=" + state + ", time=" + time
-				+ ", getRoomId()=" + getRoomId() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
-	}
-
 	/**
 	 * 地理位置
 	 */
@@ -72,11 +71,6 @@ public class RoomMsg {
 	 */
 	private String time;
 
-	public Object getRoomId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void setTime(String time2) {
 		// TODO Auto-generated method stub
 
@@ -85,5 +79,10 @@ public class RoomMsg {
 	public void setState(int i) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public Object getRoomId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

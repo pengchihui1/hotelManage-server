@@ -29,22 +29,23 @@ public class CostType extends Model<CostType> {
 	 */
 	private String name;
 
+	public CostType(int i, String string, int j) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "CostType [id=" + id + ", name=" + name + ", money=" + money + "]";
+	}
+
 	/**
 	 * 金额
 	 */
 	private Double money;
 
-	public CostType(int i, String string, int j) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public CostType(int i, String string, Object rent) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Object getId() {
+	public void setMoney(int i) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	public int getMoney() {
@@ -52,14 +53,9 @@ public class CostType extends Model<CostType> {
 		return 0;
 	}
 
-	public void setMoney(int i) {
+	public int getId() {
 		// TODO Auto-generated method stub
-
-	}
-
-	public void setMoney(Object rent) {
-		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 }

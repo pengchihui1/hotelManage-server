@@ -20,15 +20,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Guest extends Model<Guest> {
 
-	public Guest(String idCard2, String name2, String contact2) {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * 客户的身份证号
 	 */
 	@TableId("id_card")
 	private String idCard;
+
+	public Guest(String idCard2, String name2, String contact2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Guest [idCard=" + idCard + ", name=" + name + ", contact=" + contact + "]";
+	}
 
 	/**
 	 * 客户的姓名
@@ -40,7 +45,7 @@ public class Guest extends Model<Guest> {
 	 */
 	private String contact;
 
-	public String getIdCard() {
+	public Object getIdCard() {
 		// TODO Auto-generated method stub
 		return null;
 	}

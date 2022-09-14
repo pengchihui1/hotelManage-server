@@ -28,6 +28,16 @@ public class CheckIn extends Model<CheckIn> {
 	@TableId(value = "id")
 	private Integer id;
 
+	public CheckIn(int i, Object guestIdCard2, Object resultRoom, Timestamp fromTime2, Timestamp toTime2, int j) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "CheckIn [id=" + id + ", guestIdCard=" + guestIdCard + ", roomId=" + roomId + ", fromTime=" + fromTime
+				+ ", toTime=" + toTime + ", state=" + state + "]";
+	}
+
 	/**
 	 * 客户的id
 	 */
@@ -53,23 +63,9 @@ public class CheckIn extends Model<CheckIn> {
 	 */
 	private Integer state;
 
-	public CheckIn(int i, Object guestIdCard2, String resultRoom, Timestamp fromTime2, Timestamp toTime2, int j) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getRoomId() {
+	public Object getRoomId() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void setState(int i) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public int getState() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public Timestamp getFromTime() {
@@ -80,6 +76,16 @@ public class CheckIn extends Model<CheckIn> {
 	public Timestamp getToTime() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int getState() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setState(int i) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

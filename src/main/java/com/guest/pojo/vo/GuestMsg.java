@@ -29,6 +29,16 @@ public class GuestMsg {
 	 */
 	private String name;
 
+	public GuestMsg(Object idCard2, Object name2, Object contact2, int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "GuestMsg [idCard=" + idCard + ", name=" + name + ", contact=" + contact + ", state=" + state
+				+ ", roomId=" + roomId + "]";
+	}
+
 	/**
 	 * 客户的联系方式
 	 */
@@ -44,16 +54,12 @@ public class GuestMsg {
 	 */
 	private String roomId;
 
-	public GuestMsg(String idCard2, Object name2, Object contact2, int i, String string) {
-		// TODO Auto-generated constructor stub
-	}
-
 	public void setState(int i) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void setRoomId(String roomId2) {
+	public void setRoomId(Object roomId2) {
 		// TODO Auto-generated method stub
 
 	}

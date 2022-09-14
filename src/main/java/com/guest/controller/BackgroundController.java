@@ -1,17 +1,23 @@
 package com.guest.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.guest.pojo.po.Background;
 import com.guest.pojo.vo.Response;
 import com.guest.pojo.vo.ResponseMsg;
 import com.guest.service.BackgroundService;
 import com.guest.utils.JwtUtill;
-import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * <p>
@@ -24,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @Transactional
 @RestController
-@Api(tags = {"后端管理员"})
+@Api(tags = { "后端管理员" })
 public class BackgroundController {
 	@Autowired
 	private BackgroundService backgroundService;
@@ -33,16 +39,11 @@ public class BackgroundController {
 
 	@PostMapping("/backgroundLogin")
 	@ApiOperation(value = "后台管理员登录")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "Authorization", value = "token，在这个请求中不填", required = false),
+	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "token，在这个请求中不填", required = false),
 			@ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
-			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true)
-	})
-	@ApiResponses({
-			@ApiResponse(code = 200, message = "请求成功"),
-			@ApiResponse(code = 40105, message = "密码错误,请核对后重新输入"),
-			@ApiResponse(code = 40005, message = "该用户不存在")
-	})
+			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40105, message = "密码错误,请核对后重新输入"),
+			@ApiResponse(code = 40005, message = "该用户不存在") })
 	public Response backgroundLogin(Background background) {
 		Background background1 = backgroundService.getById(background.getBackId());
 		if (background1 != null) {
@@ -55,4 +56,3 @@ public class BackgroundController {
 		return new Response(ResponseMsg.NO_SUCH_USER);
 	}
 }
-

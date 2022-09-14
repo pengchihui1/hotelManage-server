@@ -35,28 +35,12 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
-         <!--
-         <dependency>
-              <groupId>org.springframework</groupId> 
-              <artifactId>spring-context</artifactId> 
-              <version>4.3.14.RELEASE</version> 
-        </dependency>
-        -->
-        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <!-- <scope>runtime</scope>-->
+            <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-   
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>5.0.4.RELEASE</version>
-        </dependency>
-
-        
         <!--防止@ConfigurationProperties爆红-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,9 +73,6 @@
             <artifactId>mybatis-plus</artifactId>
             <version>3.0.5</version>
         </dependency>
-        
-    
-        
         <!-- springfox-swagger-ui -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -160,9 +141,20 @@
             <artifactId>screw-core</artifactId>
             <version>1.0.5</version>
         </dependency>
+        
+          <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.20</version>
+        </dependency>
     </dependencies>
 
     <build>
+     <pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -217,7 +209,7 @@
                     <!--标题-->
                     <title>客房管理系统数据库文档</title>
                 </configuration>
-              <!--  <executions>
+                <executions>
                     <execution>
                         <phase>compile</phase>
                         <goals>
@@ -225,9 +217,9 @@
                         </goals>
                     </execution>
                 </executions>
-                 -->
             </plugin>
         </plugins>
+         </pluginManagement>
     </build>
 
 </project>

@@ -31,6 +31,12 @@ public class Room extends Model<Room> {
 	 */
 	private Double size;
 
+	@Override
+	public String toString() {
+		return "Room [roomId=" + roomId + ", size=" + size + ", rank=" + rank + ", rent=" + rent + ", earnest="
+				+ earnest + ", maxNum=" + maxNum + ", position=" + position + "]";
+	}
+
 	/**
 	 * 级别，分A,B,C,D级，级别依次降低
 	 */
@@ -61,17 +67,12 @@ public class Room extends Model<Room> {
 		return null;
 	}
 
-	public int getMaxNum() {
+	public int getEarnest() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public Object getRent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getEarnest() {
+	public int getRent() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -81,12 +82,17 @@ public class Room extends Model<Room> {
 		return null;
 	}
 
-	public Object getPosition() {
+	public Object getRank() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object getRank() {
+	public Object getMaxNum() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Object getPosition() {
 		// TODO Auto-generated method stub
 		return null;
 	}

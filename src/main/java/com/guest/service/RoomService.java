@@ -1,14 +1,15 @@
 package com.guest.service;
 
-import com.guest.pojo.po.Room;
-import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.guest.pojo.po.Room;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author 张雪萍
@@ -17,5 +18,7 @@ import java.util.List;
 @Service
 public interface RoomService extends IService<Room> {
 
-    List<Room> getRoomsByType(String rank);
+	List<Room> getRoomsByType(String rank);
+
+	Room getById(Object roomId);
 }

@@ -1,17 +1,18 @@
 package com.guest.service.serviceImpl;
 
-import com.guest.pojo.po.Room;
-import com.guest.mapper.RoomMapper;
-import com.guest.service.RoomService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.guest.mapper.RoomMapper;
+import com.guest.pojo.po.Room;
+import com.guest.service.RoomService;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 张雪萍
@@ -19,11 +20,17 @@ import java.util.List;
  */
 @Service
 public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements RoomService {
-    @Autowired
-    private RoomMapper roomMapper;
+	@Autowired
+	private RoomMapper roomMapper;
 
-    @Override
-    public List<Room> getRoomsByType(String rank) {
-        return roomMapper.getRoomsByType(rank);
-    }
+	@Override
+	public List<Room> getRoomsByType(String rank) {
+		return roomMapper.getRoomsByType(rank);
+	}
+
+	@Override
+	public Room getById(Object roomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

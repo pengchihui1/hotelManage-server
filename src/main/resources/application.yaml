@@ -8,7 +8,7 @@ spring:
     cache: false
   datasource:
     username: root
-    password: 981028
+    password: 
     url: jdbc:mysql://localhost:3306/guest?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
 #    url: jdbc:mysql://10.0.0.3:3306/guest?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -63,12 +63,12 @@ spring:
 logging:
   level:
     com.bit.mapper: debug
-    web: debug
+#debug: true   
 server:
   #max-http-header-size: 65546
   servlet:
     context-path: /
-  port: 80
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
 

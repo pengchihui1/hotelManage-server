@@ -55,13 +55,13 @@ public class JwtUtill {
 		return jwtBuilder.compact();
 	}
 
-	public String updateJwt(Serializable serializable) {
+	public String updateJwt(String stuNumber) {
 		// 设置失效时间，未使用，待确认
 		long now = System.currentTimeMillis();// 当前时间戳
 		long exp = now + this.ttl;// 失效时的时间戳
 		// 创建jwtBuilder
-		JwtBuilder jwtBuilder = Jwts.builder().setId((String) serializable).setIssuedAt(new Date())
-				.setExpiration(new Date(exp)).signWith(SignatureAlgorithm.HS256, key);
+		JwtBuilder jwtBuilder = Jwts.builder().setId(stuNumber).setIssuedAt(new Date()).setExpiration(new Date(exp))
+				.signWith(SignatureAlgorithm.HS256, key);
 		// 返回token
 		return jwtBuilder.compact();
 	}
@@ -87,5 +87,10 @@ public class JwtUtill {
 	 */
 	public Claims getClaims(HttpServletRequest request) {
 		return Jwts.parser().setSigningKey(key).parseClaimsJws(getToken(request)).getBody();
+	}
+
+	public String updateJwt(Serializable backId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

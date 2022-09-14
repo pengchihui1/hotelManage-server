@@ -33,6 +33,12 @@ public class Background extends Model<Background> {
 	 */
 	private String password;
 
+	public Background(String backId, String password) {
+		super();
+		this.backId = backId;
+		this.password = password;
+	}
+
 	public Serializable getBackId() {
 		// TODO Auto-generated method stub
 		return null;

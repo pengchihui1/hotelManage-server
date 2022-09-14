@@ -22,15 +22,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cost extends Model<Cost> {
 
-	public Cost(int i, Object id2, String resultRoom, int j, int k) {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * 消费信息的id
 	 */
 	@TableId(value = "id")
 	private Integer id;
+
+	public Cost(int id2, int costTypeId2, String roomId2, int i, int j) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Cost(int id2, int id3, Object resultRoom, int i, int j) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Cost [id=" + id + ", costTypeId=" + costTypeId + ", roomId=" + roomId + ", num=" + num + ", state="
+				+ state + "]";
+	}
 
 	/**
 	 * 消费项目
@@ -52,11 +62,6 @@ public class Cost extends Model<Cost> {
 	 */
 	private Integer state;
 
-	public void setState(int i) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public int getState() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -70,6 +75,11 @@ public class Cost extends Model<Cost> {
 	public int getNum() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public void setState(int i) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

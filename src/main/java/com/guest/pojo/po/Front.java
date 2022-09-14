@@ -26,6 +26,11 @@ public class Front extends Model<Front> {
 	@TableId(value = "front_id")
 	private String frontId;
 
+	@Override
+	public String toString() {
+		return "Front [frontId=" + frontId + ", name=" + name + ", password=" + password + ", phone=" + phone + "]";
+	}
+
 	/**
 	 * 前台管理员的姓名
 	 */
