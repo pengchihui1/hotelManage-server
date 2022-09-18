@@ -1,6 +1,5 @@
 package com.guest.utils;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,8 +88,20 @@ public class JwtUtill {
 		return Jwts.parser().setSigningKey(key).parseClaimsJws(getToken(request)).getBody();
 	}
 
-	public String updateJwt(Serializable backId) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getKey() {
+		return key;
 	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public Long getTtl() {
+		return ttl;
+	}
+
+	public void setTtl(Long ttl) {
+		this.ttl = ttl;
+	}
+
 }

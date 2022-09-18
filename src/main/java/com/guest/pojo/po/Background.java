@@ -1,7 +1,5 @@
 package com.guest.pojo.po;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
@@ -33,20 +31,31 @@ public class Background extends Model<Background> {
 	 */
 	private String password;
 
+	@Override
+	public String toString() {
+		return "Background [backId=" + backId + ", password=" + password + "]";
+	}
+
+	public String getBackId() {
+		return backId;
+	}
+
+	public void setBackId(String backId) {
+		this.backId = backId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Background(String backId, String password) {
 		super();
 		this.backId = backId;
 		this.password = password;
-	}
-
-	public Serializable getBackId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getPassword() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

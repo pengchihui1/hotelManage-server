@@ -1,13 +1,16 @@
 package com.guest.mapper;
 
-import com.guest.pojo.po.Background;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.guest.pojo.po.Background;
+
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author 张雪萍
@@ -17,4 +20,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BackgroundMapper extends BaseMapper<Background> {
 
+	List<Background> getAll();
+
+	Background selectUser(String backId, String password);
+
+	Background getById(String backId);
 }

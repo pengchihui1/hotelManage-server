@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guest.mapper.BackgroundMapper">
 
+	<select id="getAll" resultType="Background" >
+		select * from background
+	</select>
 
-
+	<select id="selectUser" resultType="Background" parameterType="string" >
+			select * from background where back_id = #{backId} and  password=#{password} ;
+    </select>
+    
+    <select id="getById" resultType="Background" parameterType="string" >
+			select * from background where back_id = #{backId};
+    </select>
 </mapper>
