@@ -12,4 +12,22 @@
     <delete id="removeByName" parameterType="string">
         delete from cost_type where `name` = #{name};
     </delete>
+    
+    <!-- 
+    <insert id="insert" parameterType="costType">
+       insert into cost_type(
+	     name, money
+	    )VALUES (
+	      #{name},
+	      #{money}
+	    )
+    </insert>
+    
+    <update id="update">
+	    update cost_type
+	    set name = #{name}, 
+	    name = #{name}, 
+	    where id = #{cosTTypeId}
+	</update>   
+      -->    
 </mapper>

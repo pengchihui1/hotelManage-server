@@ -14,4 +14,27 @@
         select * from guest where `name` like "%"#{name}"%";
     </select>
 
+   <!--
+    <insert id="insert" parameterType="Guest">
+       insert into guest(
+	    id_card, name, contact
+	    )VALUES (
+	      #{idCard},
+	      #{name},
+	      #{contact}
+	    )
+    </insert>
+    
+    <update id="update">
+	    update guest
+	    set name = #{name}, 
+	    contact = #{contact}
+	    where id_card = #{idCard}
+	</update>
+    
+    <delete id="removeByFrontId" parameterType="string">
+        delete from guest where id_card = #{idCard};
+    </delete>
+
+   -->    
 </mapper>

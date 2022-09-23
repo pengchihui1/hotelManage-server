@@ -1,12 +1,13 @@
 package com.guest.service;
 
-import com.guest.pojo.po.Front;
-import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.guest.pojo.po.Front;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author 张雪萍
@@ -15,4 +16,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface FrontService extends IService<Front> {
 
+	Front getById(String frontId);
 }

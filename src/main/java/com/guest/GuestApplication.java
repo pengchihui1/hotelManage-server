@@ -24,5 +24,4 @@ public class GuestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GuestApplication.class, args);
 	}
-
 }

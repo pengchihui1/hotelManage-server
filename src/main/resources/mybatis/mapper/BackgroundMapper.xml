@@ -13,4 +13,25 @@
     <select id="getById" resultType="Background" parameterType="string" >
 			select * from background where back_id = #{backId};
     </select>
+    
+  <insert id="insert" parameterType="Background">
+       insert into background(
+	    back_id,password
+	    )VALUES (
+	      #{backId},
+	      #{password}
+	    )
+    </insert>
+     <!--
+    <update id="update">
+	    update background
+	    set password = #{password}, 
+	    where back_id = #{id}
+	</update>
+    
+    <delete id="removeByBackgroundId" parameterType="string">
+        delete from background where back_id = #{backId};
+    </delete>
+     -->
+
 </mapper>

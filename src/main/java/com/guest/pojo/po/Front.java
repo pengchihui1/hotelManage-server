@@ -46,9 +46,36 @@ public class Front extends Model<Front> {
 	 */
 	private String phone;
 
-	public Object getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getFrontId() {
+		return frontId;
+	}
+
+	public void setFrontId(String frontId) {
+		this.frontId = frontId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }

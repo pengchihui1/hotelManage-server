@@ -21,4 +21,17 @@
     <delete id="removeByRoomId" parameterType="string">
         delete from cost where room_id = #{id};
     </delete>
+    
+   <!-- 
+	  <insert id="insert" parameterType="cost">
+	   insert into (
+	    cost_type_id,room_id,num,state
+	    )VALUES (
+	      #{costTypeId},
+	      #{roomId},
+	      #{num},
+	      #{state},
+	    )
+	</insert>
+    -->    
 </mapper>

@@ -66,23 +66,82 @@ public class RoomMsg {
 	 * 房间状态,1表示已经入住，0表示已被预定，-1表示空房间
 	 */
 	private Integer state;
+
 	/**
 	 * 入住/预定 时间
 	 */
 	private String time;
 
-	public void setTime(String time2) {
-		// TODO Auto-generated method stub
-
+	public void setTime(String time) {
+		this.time = time;
 	}
 
-	public void setState(int i) {
-		// TODO Auto-generated method stub
-
+	public String getRoomId() {
+		return roomId;
 	}
 
-	public Object getRoomId() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
 	}
+
+	public Double getSize() {
+		return size;
+	}
+
+	public void setSize(Double size) {
+		this.size = size;
+	}
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	public Double getRent() {
+		return rent;
+	}
+
+	public void setRent(Double rent) {
+		this.rent = rent;
+	}
+
+	public Double getEarnest() {
+		return earnest;
+	}
+
+	public void setEarnest(Double earnest) {
+		this.earnest = earnest;
+	}
+
+	public Integer getMaxNum() {
+		return maxNum;
+	}
+
+	public void setMaxNum(Integer maxNum) {
+		this.maxNum = maxNum;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
 }

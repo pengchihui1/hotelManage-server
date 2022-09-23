@@ -4,7 +4,40 @@
     <select id="getRoomsByType" parameterType="string" resultType="room">
         select * from room where rank_id in (select id from room_rank where rank = #{rank});
     </select>
+       <!--
+     <insert id="insert" parameterType="Room">
+       insert into room(
+	    room_id,
+	    size,
+	    rank,
+	    rent,
+	    earnest,
+	    max_num,
+	    position
+	    )VALUES (
+	      #{roomId},
+	      #{size},
+		  #{rank},
+		  #{rent},
+		  #{earnest},
+		  #{maxNum},
+		  #{position}
+	    )
+    </insert>
+    
+    <update id="update">
+	    update room
+	    set size = #{size}, 
+	    rank= #{rank},
+	    rent= #{rent},
+	    earnest= #{earnest},
+	    max_num= #{maxNum},
+	    position= #{position},
+	    where room_id = #{roomId}
+	</update>
+    
     <delete id="removeByRoomId" parameterType="string">
-        delete from cost where room_id = #{roomId};
+        delete from room where room_id = #{roomId};
     </delete>
+       --> 
 </mapper>

@@ -1,5 +1,7 @@
 package com.guest.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guest.pojo.po.Background;
@@ -43,30 +43,66 @@ public class BackgroundController {
 	@Autowired
 	private JwtUtill jwtUtill;
 
-	@RequestMapping("/backgroundLogin")
-	@ResponseBody
+	@PostMapping(value = "/backgroundLogin")
 	@ApiOperation(value = "后台管理员登录")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
 			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 400, message = "请求参数没填好"),
 			@ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不存在"),
 			@ApiResponse(code = 40105, message = "密码错误,请核对后重新输入"), @ApiResponse(code = 40005, message = "该用户不存在") })
-	public Response backgroundLogin(@RequestBody(required = false) Background background) {
+	public Response backgroundLogin(HttpServletRequest request, Background background) {
 		Background background1 = backgroundService.getById(background.getBackId());
+
 		if (background1 != null) {
 			if (background1.getPassword().equals(background.getPassword())) {
 				String token = jwtUtill.updateJwt(background.getBackId());
+
 				return (new Response()).success(token);
 			}
+			logger.info(null, new Response(ResponseMsg.PASSWORD_WRONG));
 			return new Response(ResponseMsg.PASSWORD_WRONG);
 		}
 		return new Response(ResponseMsg.NO_SUCH_USER);
 	}
 
+//	@RequestMapping
 	@PostMapping("/test")
-	public String test() {
-		Background background = backgroundService.selectUser("admin", "123456");
-		return "123456";
+	@ApiOperation(value = "后台管理员登录")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
+			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 400, message = "请求参数没填好"),
+			@ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不存在"),
+			@ApiResponse(code = 40105, message = "密码错误,请核对后重新输入"), @ApiResponse(code = 40005, message = "该用户不存在") })
+	public Response test(@RequestBody(required = false) Background background) {
+
+		Background background1 = backgroundService.selectUser("admin", "123456");
+		logger.info("115:" + background1);
+		if (background1 != null) {
+			if (background1.getPassword().equals(background.getPassword())) {
+				String token = jwtUtill.updateJwt(background.getBackId());
+				logger.info("111");
+				return (new Response()).success(token);
+			}
+			logger.info("222");
+			return new Response(ResponseMsg.PASSWORD_WRONG);
+		}
+		logger.info("333");
+		return new Response(ResponseMsg.NO_SUCH_USER);
+	}
+
+	@PostMapping("/backgroundAdd")
+	@ApiOperation(value = "后台管理员新增")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
+			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response insert(@RequestBody(required = false) Background background) {
+
+		int value = backgroundService.insert(background);
+		logger.info("115:" + value);
+		if (value == 1) {
+			return new Response(ResponseMsg.SUCCESS);
+		}
+		return new Response(ResponseMsg.FAIL);
 	}
 
 }

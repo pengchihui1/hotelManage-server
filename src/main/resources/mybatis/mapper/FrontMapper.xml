@@ -14,5 +14,34 @@
     <sql id="Base_Column_List">
         front_id, name, password, phone
     </sql>
+    
+     <select id="getById" resultType="Front" parameterType="string" >
+			select * from front where name = #{frontId};
+    </select>
+    
+    <!-- 
+     <insert id="insert" parameterType="front">
+       insert into front(
+	    front_id, name, password, phone
+	    )VALUES (
+	      #{frontId},
+	      #{name},
+	      #{password},
+	      #{phone}
+	    )
+    </insert>
+    
+    <update id="update">
+	    update front
+	    set name = #{name}, 
+	    password = #{password}, 
+	    phone = #{phone}
+	    where front_id = #{frontId}
+	</update>
+    
+    <delete id="removeByFrontId" parameterType="string">
+        delete from front where back_id = #{backId};
+    </delete>
+     -->    
 
 </mapper>

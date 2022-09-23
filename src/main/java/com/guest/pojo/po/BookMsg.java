@@ -69,7 +69,7 @@ public class BookMsg extends Model<BookMsg> {
 	 */
 	private String resultRoom;
 
-	public Object getResultRoom() {
+	public String getResultRoom() {
 		// TODO Auto-generated method stub
 		return null;
 	}

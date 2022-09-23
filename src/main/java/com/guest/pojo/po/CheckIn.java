@@ -63,7 +63,7 @@ public class CheckIn extends Model<CheckIn> {
 	 */
 	private Integer state;
 
-	public Object getRoomId() {
+	public String getRoomId() {
 		// TODO Auto-generated method stub
 		return null;
 	}

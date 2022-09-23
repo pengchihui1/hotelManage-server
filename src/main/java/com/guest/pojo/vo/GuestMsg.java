@@ -29,7 +29,7 @@ public class GuestMsg {
 	 */
 	private String name;
 
-	public GuestMsg(Object idCard2, Object name2, Object contact2, int i, String string) {
+	public GuestMsg(String idCard2, String name2, String contact2, int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -54,13 +54,44 @@ public class GuestMsg {
 	 */
 	private String roomId;
 
-	public void setState(int i) {
-		// TODO Auto-generated method stub
-
+	public String getIdCard() {
+		return idCard;
 	}
 
-	public void setRoomId(Object roomId2) {
-		// TODO Auto-generated method stub
-
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public String getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
+	}
+
 }

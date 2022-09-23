@@ -28,4 +28,6 @@ public interface BackgroundService extends IService<Background> {
 	Background selectUser(String backId, String password);
 
 	Background getById(String backId);
+
+	int insert(Background background);
 }

@@ -44,4 +44,11 @@ public class BackgroundServiceImpl extends ServiceImpl<BackgroundMapper, Backgro
 		return background;
 	}
 
+	@Override
+	public int insert(Background background) {
+		// TODO Auto-generated method stub
+
+		return backgroundMapper.insert(background);
+	}
+
 }

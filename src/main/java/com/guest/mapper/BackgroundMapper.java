@@ -25,4 +25,6 @@ public interface BackgroundMapper extends BaseMapper<Background> {
 	Background selectUser(String backId, String password);
 
 	Background getById(String backId);
+
+	int insert(Background background);
 }

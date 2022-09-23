@@ -45,19 +45,28 @@ public class Guest extends Model<Guest> {
 	 */
 	private String contact;
 
-	public Object getIdCard() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getIdCard() {
+		return idCard;
 	}
 
-	public Object getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
 
-	public Object getContact() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 }
