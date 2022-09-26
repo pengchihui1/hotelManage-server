@@ -11,8 +11,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * spring boot工程都有一个启动引导类，这是工程的入口类 并在引导类上添加@SpringBootApplication
+ */
 @EnableTransactionManagement(proxyTargetClass = true)
 @SpringBootApplication
+//扫描mybatis所有的业务mapper接口
 @MapperScan("com.guest.mapper")
 @EnableSwagger2
 public class GuestApplication {

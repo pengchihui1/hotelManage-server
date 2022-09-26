@@ -53,4 +53,16 @@ public class CostServiceImpl extends ServiceImpl<CostMapper, Cost> implements Co
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public int insertCost(Cost cost) {
+		// TODO Auto-generated method stub
+		return costMapper.insertCost(cost);
+	}
+
+	@Override
+	public Cost getCostById(Integer id) {
+		// TODO Auto-generated method stub
+		return costMapper.getCostById(id);
+	}
 }

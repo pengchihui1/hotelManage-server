@@ -67,12 +67,10 @@ public class Response<T> implements Serializable {
 		this.code = ResponseMsg.SUCCESS.code;
 		this.msg = ResponseMsg.SUCCESS.msg;
 		this.data = data;
-		logger.info("数据处理：", this);
 		return this;
 	}
 
 	public Response success() {
-		logger.info("执行了");
 		return new Response(ResponseMsg.SUCCESS);
 	}
 

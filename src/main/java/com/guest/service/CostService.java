@@ -29,4 +29,8 @@ public interface CostService extends IService<Cost> {
 	boolean removeByCostTypeId(Integer id);
 
 	void removeByRoomId(Object roomId);
+
+	int insertCost(Cost cost);
+
+	Cost getCostById(Integer id);
 }

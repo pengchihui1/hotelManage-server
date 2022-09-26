@@ -1,15 +1,16 @@
 package com.guest.mapper;
 
-import com.guest.pojo.po.Room;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.guest.pojo.po.Room;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author 张雪萍
@@ -18,5 +19,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface RoomMapper extends BaseMapper<Room> {
-    List<Room> getRoomsByType(String rank);
+	List<Room> getRoomsByType(String rank);
+
+	int insertRoom(Room room);
+
+	List<Room> getAll();
 }

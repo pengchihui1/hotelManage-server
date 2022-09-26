@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guest.mapper.CostMapper">
 
-    <select id="getCostByRoomId" resultType="cost" parameterType="string">
+    <select id="getCostByRoomId" resultType="Cost" parameterType="string">
         select * from cost where room_id = #{roomId};
     </select>
 
@@ -13,6 +13,10 @@
     <select id="getNotCostNum" parameterType="string" resultType="int">
         select count(*) from cost where state = 0 and room_id = #{roomId};
     </select>
+    
+    <select id="getCostById" parameterType="int" resultType="Cost">
+        select * from cost where id = #{id};
+    </select>
 
     <delete id="removeByCostTypeId" parameterType="int">
         delete from cost where cost_type_id = #{id};
@@ -21,9 +25,8 @@
     <delete id="removeByRoomId" parameterType="string">
         delete from cost where room_id = #{id};
     </delete>
-    
-   <!-- 
-	  <insert id="insert" parameterType="cost">
+   
+	 <insert id="insertCost" parameterType="int">
 	   insert into (
 	    cost_type_id,room_id,num,state
 	    )VALUES (
@@ -33,5 +36,5 @@
 	      #{state},
 	    )
 	</insert>
-    -->    
+   
 </mapper>

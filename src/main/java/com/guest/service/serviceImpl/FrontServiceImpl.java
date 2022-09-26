@@ -22,9 +22,16 @@ public class FrontServiceImpl extends ServiceImpl<FrontMapper, Front> implements
 	private FrontMapper frontMapper;
 
 	@Override
-	public Front getById(String frontId) {
+	public Front getFrontById(String frontId) {
 		// TODO Auto-generated method stub
-		Front front = frontMapper.getById(frontId);
+		Front front = frontMapper.getFrontById(frontId);
 		return front;
+	}
+
+	@Override
+	public int insertFront(Front front) {
+		// TODO Auto-generated method stub
+		int num = frontMapper.insertFront(front);
+		return num;
 	}
 }

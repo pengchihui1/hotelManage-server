@@ -16,5 +16,7 @@ import com.guest.pojo.po.Front;
 @Service
 public interface FrontService extends IService<Front> {
 
-	Front getById(String frontId);
+	Front getFrontById(String frontId);
+
+	int insertFront(Front front);
 }

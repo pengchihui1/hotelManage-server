@@ -53,7 +53,7 @@ public class Background extends Model<Background> {
 	}
 
 	public Background(String backId, String password) {
-		super();
+//		super();
 		this.backId = backId;
 		this.password = password;
 	}

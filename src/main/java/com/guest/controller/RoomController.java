@@ -96,8 +96,8 @@ public class RoomController {
 			if (costTypes1 != null && costTypes1.size() > 0 && costTypes2 != null && costTypes2.size() > 0) {
 				costType1 = costTypes1.get(0);
 				costType2 = costTypes2.get(0);
-				costType1.setMoney(0 - room.getEarnest());
-				costType1.setMoney(room.getRent());
+				costType1.setMoney((double) (0 - room.getEarnest()));
+				costType1.setMoney((double) room.getRent());
 			} else {
 				costType1 = new CostType(0, room.getRoomId() + "房间定金", 0 - room.getEarnest());
 				costType2 = new CostType(0, room.getRoomId() + "房间租金", room.getRent());

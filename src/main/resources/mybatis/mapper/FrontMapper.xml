@@ -2,25 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guest.mapper.FrontMapper">
 
-    <!-- 通用查询映射结果 -->
+    <!-- 通用查询映射结果
     <resultMap id="BaseResultMap" type="com.guest.pojo.po.Front">
         <id column="front_id" property="frontId" />
         <result column="name" property="name" />
         <result column="password" property="password" />
         <result column="phone" property="phone" />
     </resultMap>
+     -->
 
     <!-- 通用查询结果列 -->
+     <!-- 
     <sql id="Base_Column_List">
         front_id, name, password, phone
     </sql>
-    
-     <select id="getById" resultType="Front" parameterType="string" >
+     -->
+     <select id="getFrontById" resultType="Front" parameterType="string"  >
 			select * from front where name = #{frontId};
     </select>
     
-    <!-- 
-     <insert id="insert" parameterType="front">
+
+     <insert id="insertFront" parameterType="front">
        insert into front(
 	    front_id, name, password, phone
 	    )VALUES (
@@ -31,6 +33,8 @@
 	    )
     </insert>
     
+    
+    <!-- 
     <update id="update">
 	    update front
 	    set name = #{name}, 

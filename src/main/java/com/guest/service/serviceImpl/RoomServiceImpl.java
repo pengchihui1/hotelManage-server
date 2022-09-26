@@ -33,4 +33,18 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int insertRoom(Room room) {
+		// TODO Auto-generated method stub
+		int num = roomMapper.insertRoom(room);
+		return num;
+	}
+
+	@Override
+	public List<Room> getAll() {
+		// TODO Auto-generated method stub
+		List<Room> list = roomMapper.getAll();
+		return list;
+	}
 }

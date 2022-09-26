@@ -8,14 +8,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.guest.pojo.po.BookMsg;
 import com.guest.pojo.po.CheckIn;
-import com.guest.pojo.po.Cost;
 import com.guest.pojo.po.CostType;
 import com.guest.pojo.po.Guest;
 import com.guest.pojo.po.Room;
@@ -47,7 +46,7 @@ import io.swagger.annotations.ApiResponses;
  */
 @CrossOrigin
 @Transactional
-@RestController
+@Controller
 @Api(tags = { "入住信息" })
 public class CheckInController {
 	@Autowired
@@ -95,14 +94,14 @@ public class CheckInController {
 			List<CostType> costTypes2 = costTypeService.getCostTypeByName(costName2);
 			if (costTypes1 != null && costTypes2 != null && costTypes1.size() > 0 && costTypes2.size() > 0) {
 				CostType costType = costTypes1.get(0);
-				Cost cost1 = new Cost(0, costType.getId(), bookMsg.getResultRoom(), 1, 0);
-				costService.saveOrUpdate(cost1);
+//				Cost cost1 = new Cost(0, costType.getId(), bookMsg.getResultRoom(), 1, 0);
+//				costService.saveOrUpdate(cost1);
 
 				int costNum = (int) (bookMsg.getToTime().getTime() - bookMsg.getFromTime().getTime()) / 1000 / 60 / 60
 						/ 24;
 				costType = costTypes2.get(0);
-				cost1 = new Cost(0, costType.getId(), bookMsg.getResultRoom(), costNum, 1);
-				costService.saveOrUpdate(cost1);
+//				cost1 = new Cost(0, costType.getId(), bookMsg.getResultRoom(), costNum, 1);
+//				costService.saveOrUpdate(cost1);
 
 				bookMsgService.saveOrUpdate(bookMsg);
 				checkInService.saveOrUpdate(checkIn);
@@ -149,13 +148,13 @@ public class CheckInController {
 					List<CostType> costTypes2 = costTypeService.getCostTypeByName(costName2);
 					if (costTypes1 != null && costTypes2 != null && costTypes1.size() > 0 && costTypes2.size() > 0) {
 						CostType costType = costTypes1.get(0);
-						Cost cost1 = new Cost(0, costType.getId(), roomId, 1, 0);
-						costService.saveOrUpdate(cost1);
+//						Cost cost1 = new Cost(0, costType.getId(), roomId, 1, 0);
+//						costService.saveOrUpdate(cost1);
 
 						int costNum = (int) (toTime - fromTime) / 1000 / 60 / 60 / 24;
 						costType = costTypes2.get(0);
-						cost1 = new Cost(0, costType.getId(), roomId, costNum, 1);
-						costService.saveOrUpdate(cost1);
+//						cost1 = new Cost(0, costType.getId(), roomId, costNum, 1);
+//						costService.saveOrUpdate(cost1);
 					} else {
 						return new Response(ResponseMsg.FAIL);
 					}

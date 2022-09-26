@@ -1,5 +1,7 @@
 package com.guest.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -7,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -100,6 +103,40 @@ public class BackgroundController {
 		int value = backgroundService.insert(background);
 		logger.info("115:" + value);
 		if (value == 1) {
+			return new Response(ResponseMsg.SUCCESS);
+		}
+		return new Response(ResponseMsg.FAIL);
+	}
+
+	@GetMapping("/getById")
+	@ApiOperation(value = "后台管理员单个查询")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response getById(String backId) {
+		Background background = backgroundService.getById(backId);
+		if (background != null) {
+			return new Response(ResponseMsg.SUCCESS);
+		}
+		return new Response(ResponseMsg.FAIL);
+	}
+
+	@GetMapping("/getAll")
+	@ApiOperation(value = "后台管理员所有")
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response getAll() {
+		List<Background> list = backgroundService.getAll();
+		return new Response(ResponseMsg.SUCCESS);
+
+	}
+
+	@GetMapping("/selectUser")
+	@ApiOperation(value = "后台管理员一个用户")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
+			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response selectUser(String backId, String password) {
+		Background background = backgroundService.selectUser(backId, password);
+		if (background != null) {
 			return new Response(ResponseMsg.SUCCESS);
 		}
 		return new Response(ResponseMsg.FAIL);

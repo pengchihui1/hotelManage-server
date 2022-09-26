@@ -21,4 +21,8 @@ public interface RoomService extends IService<Room> {
 	List<Room> getRoomsByType(String rank);
 
 	Room getById(Object roomId);
+
+	int insertRoom(Room room);
+
+	List<Room> getAll();
 }

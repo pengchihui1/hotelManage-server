@@ -43,19 +43,28 @@ public class CostType extends Model<CostType> {
 	 */
 	private Double money;
 
-	public void setMoney(int i) {
-		// TODO Auto-generated method stub
-
+	public Integer getId() {
+		return id;
 	}
 
-	public int getMoney() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
 	}
 
 }

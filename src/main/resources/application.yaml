@@ -2,6 +2,8 @@
 mybatis-plus:
  mapper-locations: classpath:mybatis/mapper/*.xml
  type-aliases-package: com.guest.pojo
+ configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # 连接数据库
 spring:
   thymeleaf:

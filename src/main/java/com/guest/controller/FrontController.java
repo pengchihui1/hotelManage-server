@@ -40,6 +40,7 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin
 @Transactional
 @RestController
+//@RequestMapping("front")
 @Api(tags = { "前台管理员" })
 public class FrontController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -51,7 +52,7 @@ public class FrontController {
 
 	@PostMapping("/addFront")
 	@ApiOperation(value = "添加前台账号")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "填后台管理员的token", required = true),
+	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "填后台管理员的token", required = false),
 			@ApiImplicitParam(name = "frontId", value = "前台管理员的工号", required = true),
 			@ApiImplicitParam(name = "name", value = "前台管理员的姓名", required = false),
 			@ApiImplicitParam(name = "password", value = "前台管理员的密码", required = true),
@@ -59,13 +60,15 @@ public class FrontController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response addFront(HttpServletRequest request, Front front) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			frontService.saveOrUpdate(front);
-			String token = jwtUtill.updateJwt(num);
-			return (new Response()).success(token);
-		}
+
+//		String num = (String) request.getAttribute("num");
+//		if (frontService.getById(num) != null) {
+//			frontService.saveOrUpdate(front);
+//			String token = jwtUtill.updateJwt(num);
+//			return (new Response()).success(token);
+//		}
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
+
 	}
 
 	@DeleteMapping("/deleteFront")
@@ -127,23 +130,24 @@ public class FrontController {
 	}
 
 	@GetMapping("/getFrontById")
+//	RequestMapping
 	@ApiOperation(value = "通过职工id获取前台账号")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "token，填后台管理员的token", required = true), })
+	@ApiImplicitParams({ @ApiImplicitParam(name = "frontId", value = "前台员工的账号id，", required = true) })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response getFrontById(HttpServletRequest request, String frontId) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			Front front = frontService.getById(frontId);
-			if (front != null) {
-				Map<String, Object> resultMap = new HashMap<>();
-				String token = jwtUtill.updateJwt(num);
-				resultMap.put("front", front);
-				resultMap.put("token", token);
-				return (new Response()).success(resultMap);
-			}
-			return new Response(ResponseMsg.NO_TARGET);
-		}
+		logger.info("front:", frontId);
+
+//			Front front = frontService.getById(frontId);
+//			if (front != null) {
+//				Map<String, Object> resultMap = new HashMap<>();
+//				String token = jwtUtill.updateJwt(num);
+//				resultMap.put("front", front);
+//				resultMap.put("token", token);
+//				return (new Response()).success(resultMap);
+//			}
+
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
+
 	}
 }
