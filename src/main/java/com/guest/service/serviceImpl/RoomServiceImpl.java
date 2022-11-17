@@ -15,36 +15,41 @@ import com.guest.service.RoomService;
  * 服务实现类
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Service
 public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements RoomService {
 	@Autowired
-	private RoomMapper roomMapper;
+	private RoomMapper dao;
 
 	@Override
 	public List<Room> getRoomsByType(String rank) {
-		return roomMapper.getRoomsByType(rank);
+		return dao.getRoomsByType(rank);
 	}
 
 	@Override
-	public Room getById(Object roomId) {
+	public Room getById(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getById(id);
 	}
 
 	@Override
-	public int insertRoom(Room room) {
+	public int insert(Room room) {
 		// TODO Auto-generated method stub
-		int num = roomMapper.insertRoom(room);
-		return num;
+		return dao.insert(room);
 	}
 
 	@Override
-	public List<Room> getAll() {
+	public int update(Room room) {
 		// TODO Auto-generated method stub
-		List<Room> list = roomMapper.getAll();
-		return list;
+		return dao.update(room);
 	}
+
+	@Override
+	public boolean deleteById(String id) {
+		// TODO Auto-generated method stub
+		return dao.deleteById(id);
+	}
+
 }
