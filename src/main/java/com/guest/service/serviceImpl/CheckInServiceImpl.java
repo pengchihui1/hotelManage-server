@@ -16,8 +16,8 @@ import com.guest.service.CheckInService;
  * 服务实现类
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Service
 public class CheckInServiceImpl extends ServiceImpl<CheckInMapper, CheckIn> implements CheckInService {

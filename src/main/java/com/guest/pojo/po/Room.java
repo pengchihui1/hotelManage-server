@@ -1,5 +1,6 @@
 package com.guest.pojo.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
@@ -12,8 +13,8 @@ import lombok.NoArgsConstructor;
  * 房间信息
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Data
 @NoArgsConstructor
@@ -23,19 +24,13 @@ public class Room extends Model<Room> {
 	/**
 	 * 房间编号
 	 */
-	@TableId(value = "room_id")
+	@TableId(value = "room_id", type = IdType.ID_WORKER)
 	private String roomId;
 
 	/**
 	 * 房间的大小，以平方米为单位
 	 */
 	private Double size;
-
-	@Override
-	public String toString() {
-		return "Room [roomId=" + roomId + ", size=" + size + ", rank=" + rank + ", rent=" + rent + ", earnest="
-				+ earnest + ", maxNum=" + maxNum + ", position=" + position + "]";
-	}
 
 	/**
 	 * 级别，分A,B,C,D级，级别依次降低
@@ -61,6 +56,12 @@ public class Room extends Model<Room> {
 	 * 地理位置
 	 */
 	private String position;
+
+	@Override
+	public String toString() {
+		return "Room [roomId=" + roomId + ", size=" + size + ", rank=" + rank + ", rent=" + rent + ", earnest="
+				+ earnest + ", maxNum=" + maxNum + ", position=" + position + "]";
+	}
 
 	public String getRoomId() {
 		// TODO Auto-generated method stub

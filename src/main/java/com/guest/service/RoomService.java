@@ -12,17 +12,28 @@ import com.guest.pojo.po.Room;
  * 服务类
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Service
 public interface RoomService extends IService<Room> {
 
-	List<Room> getRoomsByType(String rank);
+//	类型查询及翻页查询
+	public List<Room> getRoomsByType(String rank);
 
-	Room getById(Object roomId);
+//	获得所有及翻页 
+//	public List<Room> findAll();
 
-	int insertRoom(Room room);
+//	单个查询
+	public Room getById(String id);
 
-	List<Room> getAll();
+//	新增
+	public int insert(Room room);
+
+//	修改
+	public int update(Room room);
+
+//	删除
+	boolean deleteById(String id);
+
 }

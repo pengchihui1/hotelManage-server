@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * 消费类型
  * </p>
  *
- * @author 张雪萍
+ * @author 阿辉
  * @since 2020-12-02
  */
 @Data

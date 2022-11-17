@@ -13,15 +13,28 @@ import com.guest.pojo.po.Room;
  * Mapper 接口
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Mapper
 @Repository
 public interface RoomMapper extends BaseMapper<Room> {
-	List<Room> getRoomsByType(String rank);
 
-	int insertRoom(Room room);
+//	类型查询及翻页查询
+	public List<Room> getRoomsByType(String rank);
 
-	List<Room> getAll();
+//	获得所有及翻页 
+//	public List<Room> findAll();
+
+//	单个查询
+	public Room getById(String id);
+
+//	新增
+	public int insert(Room room);
+
+//	修改
+	public int update(Room room);
+
+//	删除
+	boolean deleteById(String id);
 }

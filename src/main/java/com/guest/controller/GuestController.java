@@ -41,7 +41,7 @@ import io.swagger.annotations.ApiResponses;
  * 前端控制器
  * </p>
  *
- * @author 张雪萍
+ * @author 阿辉
  * @since 2020-12-02
  */
 @CrossOrigin

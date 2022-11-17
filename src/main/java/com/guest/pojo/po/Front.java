@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
  * 前台管理的账号
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Data
 @NoArgsConstructor

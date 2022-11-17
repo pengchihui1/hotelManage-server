@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
  * 入住情况
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @Data
 @NoArgsConstructor

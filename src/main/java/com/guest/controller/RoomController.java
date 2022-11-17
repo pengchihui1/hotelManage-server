@@ -8,8 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,21 +38,23 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
  * 前端控制器
  * </p>
  *
- * @author 张雪萍
- * @since 2020-11-27
+ * @author 阿辉
+ * @since 202-11-12
  */
 @CrossOrigin
 @Transactional
 @RestController
 @Api(tags = { "房间" })
+@Slf4j
 public class RoomController {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+//	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private RoomService roomService;
 	@Autowired
@@ -74,18 +74,20 @@ public class RoomController {
 
 	@PostMapping("/addRoom")
 	@ApiOperation(value = "添加/修改房间")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "后台管理员的token", required = true),
+	@ApiImplicitParams({
+			// @ApiImplicitParam(name = "Authorization", value = "后台管理员的token", required =
+			// true),
 			@ApiImplicitParam(name = "roomId", value = "房间id，如果要修改，填要修改的房间id", required = true),
-			@ApiImplicitParam(name = "rank", value = "房间级别，共A,B,C,D三个级别", required = true),
-			@ApiImplicitParam(name = "rent", value = "租金，单位是人民币元", required = true),
-			@ApiImplicitParam(name = "earnest", value = "入住定金，单位是人民币元", required = true),
-			@ApiImplicitParam(name = "maxNum", value = "最大人数", required = true),
-			@ApiImplicitParam(name = "size", value = "房间的大小，以平方米为单位", required = true),
-			@ApiImplicitParam(name = "position", value = "房间的具体位置信息", required = true), })
+			@ApiImplicitParam(name = "rank", value = "房间级别，共A,B,C,D三个级别", required = false),
+			@ApiImplicitParam(name = "rent", value = "租金，单位是人民币元", required = false),
+			@ApiImplicitParam(name = "earnest", value = "入住定金，单位是人民币元", required = false),
+			@ApiImplicitParam(name = "maxNum", value = "最大人数", required = false),
+			@ApiImplicitParam(name = "size", value = "房间的大小，以平方米为单位", required = false),
+			@ApiImplicitParam(name = "position", value = "房间的具体位置信息", required = false), })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response addRoom(HttpServletRequest request, Room room) {
-		logger.info("123", room);
+//		logger.debug("debug");
 		String num = (String) request.getAttribute("num");
 		if (backgroundService.getById(num) != null) {
 			roomService.saveOrUpdate(room);
@@ -197,7 +199,8 @@ public class RoomController {
 
 	@GetMapping("/getRoomById")
 	@ApiOperation(value = "通过id获取房间")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "后/前台管理员的token", required = true),
+	@ApiImplicitParams({
+//		@ApiImplicitParam(name = "Authorization", value = "后/前台管理员的token", required = true),
 			@ApiImplicitParam(name = "id", value = "房间的id", required = true), })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
