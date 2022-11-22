@@ -2,6 +2,8 @@ package com.guest.service.serviceImpl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import com.guest.service.RoomService;
  */
 @Service
 public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements RoomService {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private RoomMapper dao;
 
@@ -42,14 +45,18 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
 
 	@Override
 	public int update(Room room) {
-		// TODO Auto-generated method stub
 		return dao.update(room);
 	}
 
 	@Override
 	public boolean deleteById(String id) {
-		// TODO Auto-generated method stub
 		return dao.deleteById(id);
+	}
+
+	@Override
+	public List<Room> findAll() {
+		List<Room> rooms = dao.findAll();
+		return rooms;
 	}
 
 }

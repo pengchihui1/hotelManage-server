@@ -22,7 +22,7 @@ public interface RoomService extends IService<Room> {
 	public List<Room> getRoomsByType(String rank);
 
 //	获得所有及翻页 
-//	public List<Room> findAll();
+	public List<Room> findAll();
 
 //	单个查询
 	public Room getById(String id);

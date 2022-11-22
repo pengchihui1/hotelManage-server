@@ -3,20 +3,27 @@
 <mapper namespace="com.guest.mapper.RoomMapper">
    
     <!-- 使用resultMap可以处理属性名称和数据库列名不一致的问题 -->
-	<!--  
-	<resultMap type="UserMailVo" id="result">
-		<result property = "userId" column = "userid" />
-		<result property = "userName" column = "username" />
-		<result property = "signFlag" column = "sign_flag" />
-	</resultMap>
-	-->
+    
+    <resultMap id="RoomResultMap" type="com.guest.pojo.po.Room">
+        <id column="room_id" property="roomId" />
+        <result column="size" property="size" />
+        <result column="rank" property="rank" />
+        <result column="rent" property="rent" />
+        <result column="earnest" property="earnest" />
+        <result column="max_num" property="maxNum" />
+        <result column="position" property="position" />
+    </resultMap>
    
-   	<select id="getById" resultType="Room" >
+   	<select id="getById" resultMap="RoomResultMap" >
 	  select * from room where room_id = #{id}
 	</select>
  
-    <select id="getRoomsByType" parameterType="string" resultType="room">
+    <select id="getRoomsByType" parameterType="string" resultType="Room">
         select * from room where rank = #{rank};
+    </select>
+    
+     <select id="findAll" resultMap="RoomResultMap">
+        select * from room
     </select>
     
     <insert id="insert" parameterType="Room" >

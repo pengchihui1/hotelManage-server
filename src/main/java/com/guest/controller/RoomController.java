@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,7 +40,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
@@ -52,9 +53,8 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @RestController
 @Api(tags = { "房间" })
-@Slf4j
 public class RoomController {
-//	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private RoomService roomService;
 	@Autowired
@@ -135,66 +135,19 @@ public class RoomController {
 
 	@GetMapping("/getAllRooms")
 	@ApiOperation(value = "获取所有的房间")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "后/前台管理员的token", required = true) })
+//	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "后/前台管理员的token", required = true) })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response getAllRooms(HttpServletRequest request) {
-		String num = (String) request.getAttribute("num");
-		if (backgroundService.getById(num) != null || frontService.getById(num) != null) {
-			List<Room> rooms = roomService.list();
-			if (rooms != null && rooms.size() > 0) {
-				Timestamp now = new Timestamp(System.currentTimeMillis());
-				Timestamp later = new Timestamp(System.currentTimeMillis() + 31536000000l);
-				// 获取当前的预定信息
-				List<BookMsg> bookMsgs = bookMsgService.getBookMsgByTime(now, later);
-				// 获取当前正在入住的信息
-				List<CheckIn> checkIns = checkInService.getValidCheckIns(now, now);
-				List<RoomMsg> roomMsgs = new ArrayList<>();
-				for (Room room : rooms) {
-					RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
-							room.getEarnest(), room.getMaxNum(), room.getPosition(), -1, "");
-					int f = 0;
-					for (CheckIn checkIn : checkIns) {
-						if (f == 1)
-							break;
-						if (checkIn.getRoomId().equals(roomMsg.getRoomId())) {
-							roomMsg.setState(1);
-							Timestamp fromTime = checkIn.getFromTime();
-							Timestamp toTime = checkIn.getToTime();
-							String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
-									+ toTime.toString().substring(0, 10).replace("-", ".");
-							roomMsg.setTime(time);
-							roomMsgs.add(roomMsg);
-							f = 1;
-						}
-					}
-
-					for (BookMsg bookMsg : bookMsgs) {
-						if (f == 1)
-							break;
-						if (bookMsg.getResultRoom().equals(roomMsg.getRoomId())) {
-							roomMsg.setState(0);
-							Timestamp fromTime = bookMsg.getFromTime();
-							Timestamp toTime = bookMsg.getToTime();
-							String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
-									+ toTime.toString().substring(0, 10).replace("-", ".");
-							roomMsg.setTime(time);
-							roomMsgs.add(roomMsg);
-							f = 1;
-						}
-					}
-					if (f != 1)
-						roomMsgs.add(roomMsg);
-				}
-				Map<String, Object> resultMap = new HashMap<>();
-				String token = jwtUtill.updateJwt(num);
-				resultMap.put("roomMsgs", roomMsgs);
-				resultMap.put("token", token);
-				return (new Response()).success(resultMap);
-			}
+		List<Room> list = roomService.findAll();
+		if (list != null && list.size() > 0) {
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("list", list);
+			return new Response().success(request);
+		} else {
 			return new Response(ResponseMsg.NO_TARGET);
 		}
-		return new Response(ResponseMsg.ILLEGAL_OPERATION);
+
 	}
 
 	@GetMapping("/getRoomById")
@@ -205,7 +158,9 @@ public class RoomController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response getRoomById(HttpServletRequest request, String id) {
+
 		String num = (String) request.getAttribute("num");
+
 		if (backgroundService.getById(num) != null || frontService.getById(num) != null) {
 			Room room = roomService.getById(id);
 

@@ -30,4 +30,6 @@ public interface BackgroundService extends IService<Background> {
 	Background getById(String backId);
 
 	int insert(Background background);
+
+	boolean remove(String backId);
 }

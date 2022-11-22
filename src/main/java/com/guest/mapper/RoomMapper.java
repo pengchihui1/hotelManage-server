@@ -21,19 +21,19 @@ import com.guest.pojo.po.Room;
 public interface RoomMapper extends BaseMapper<Room> {
 
 //	类型查询及翻页查询
-	public List<Room> getRoomsByType(String rank);
+	List<Room> getRoomsByType(String rank);
 
 //	获得所有及翻页 
-//	public List<Room> findAll();
+	List<Room> findAll();
 
 //	单个查询
-	public Room getById(String id);
+	Room getById(String id);
 
 //	新增
-	public int insert(Room room);
+	int insert(Room room);
 
 //	修改
-	public int update(Room room);
+	int update(Room room);
 
 //	删除
 	boolean deleteById(String id);

@@ -1,6 +1,8 @@
 package com.guest.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -84,7 +86,7 @@ public class BackgroundController {
 			if (background1.getPassword().equals(background.getPassword())) {
 				String token = jwtUtill.updateJwt(background.getBackId());
 				logger.info("111");
-				return (new Response()).success(token);
+				return (new Response()).success(background1);
 			}
 			logger.info("222");
 			return new Response(ResponseMsg.PASSWORD_WRONG);
@@ -93,7 +95,7 @@ public class BackgroundController {
 		return new Response(ResponseMsg.NO_SUCH_USER);
 	}
 
-	@PostMapping("/backgroundAdd")
+	@PostMapping("/addbackground")
 	@ApiOperation(value = "后台管理员新增")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
 			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
@@ -108,6 +110,19 @@ public class BackgroundController {
 		return new Response(ResponseMsg.FAIL);
 	}
 
+	@PostMapping("/removeBackground")
+	@ApiOperation(value = "后台管理员新增")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response remove(@RequestBody(required = false) String backId) {
+
+		Boolean value = backgroundService.remove(backId);
+		if (value == true) {
+			return new Response(ResponseMsg.SUCCESS);
+		}
+		return new Response(ResponseMsg.FAIL);
+	}
+
 	@GetMapping("/getById")
 	@ApiOperation(value = "后台管理员单个查询")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true) })
@@ -115,6 +130,7 @@ public class BackgroundController {
 	public Response getById(String backId) {
 		Background background = backgroundService.getById(backId);
 		if (background != null) {
+
 			return new Response(ResponseMsg.SUCCESS);
 		}
 		return new Response(ResponseMsg.FAIL);
@@ -125,8 +141,9 @@ public class BackgroundController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
 	public Response getAll() {
 		List<Background> list = backgroundService.getAll();
-		return new Response(ResponseMsg.SUCCESS);
-
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("list", list);
+		return new Response().success(resultMap);
 	}
 
 	@GetMapping("/selectUser")
@@ -141,5 +158,4 @@ public class BackgroundController {
 		}
 		return new Response(ResponseMsg.FAIL);
 	}
-
 }

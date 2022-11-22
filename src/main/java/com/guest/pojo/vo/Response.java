@@ -67,6 +67,9 @@ public class Response<T> implements Serializable {
 		this.code = ResponseMsg.SUCCESS.code;
 		this.msg = ResponseMsg.SUCCESS.msg;
 		this.data = data;
+		System.out.println("---------");
+		System.out.println("咨询:" + data);
+		System.out.println("---------");
 		return this;
 	}
 
