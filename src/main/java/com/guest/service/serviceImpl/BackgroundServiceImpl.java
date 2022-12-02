@@ -57,4 +57,10 @@ public class BackgroundServiceImpl extends ServiceImpl<BackgroundMapper, Backgro
 		return backgroundMapper.remove(backId);
 	}
 
+	@Override
+	public int update(Background background) {
+		// TODO Auto-generated method stub
+		return backgroundMapper.update(background);
+	}
+
 }

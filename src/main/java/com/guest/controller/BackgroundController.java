@@ -11,8 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -110,14 +112,27 @@ public class BackgroundController {
 		return new Response(ResponseMsg.FAIL);
 	}
 
-	@PostMapping("/removeBackground")
+	@DeleteMapping("/removeBackground")
 	@ApiOperation(value = "后台管理员新增")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true) })
 	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
-	public Response remove(@RequestBody(required = false) String backId) {
+	public Response remove(String backId) {
 
 		Boolean value = backgroundService.remove(backId);
 		if (value == true) {
+			return new Response(ResponseMsg.SUCCESS);
+		}
+		return new Response(ResponseMsg.FAIL);
+	}
+
+	@PutMapping("/updateBackground")
+	@ApiOperation(value = "后台管理员新增")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "backId", value = "后台管理员的工号", required = true),
+			@ApiImplicitParam(name = "password", value = "后台管理员的密码", required = true) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response update(@RequestBody(required = false) Background background) {
+		int value = backgroundService.update(background);
+		if (value == 1) {
 			return new Response(ResponseMsg.SUCCESS);
 		}
 		return new Response(ResponseMsg.FAIL);

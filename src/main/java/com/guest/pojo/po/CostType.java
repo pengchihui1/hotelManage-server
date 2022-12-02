@@ -22,32 +22,28 @@ public class CostType extends Model<CostType> {
 	/**
 	 * 消费类型的id
 	 */
-	private Integer id;
+	private String id;
 
 	/**
 	 * 消费项目的名称
 	 */
 	private String name;
 
-	public CostType(int i, String string, int j) {
-		// TODO Auto-generated constructor stub
-	}
+	/**
+	 * 金额
+	 */
+	private Double money;
 
 	@Override
 	public String toString() {
 		return "CostType [id=" + id + ", name=" + name + ", money=" + money + "]";
 	}
 
-	/**
-	 * 金额
-	 */
-	private Double money;
-
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

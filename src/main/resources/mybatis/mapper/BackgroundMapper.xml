@@ -22,13 +22,17 @@
 	      #{password}
 	    )
     </insert>
-     <!--
-    <update id="update">
-	    update background
-	    set password = #{password}, 
-	    where back_id = #{id}
-	</update>
-      -->
+	
+	<!--通过主键修改数据-->
+    <update id="update" parameterType="Background">
+        update background
+        <set>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+        </set>
+        where back_id = #{backId}
+    </update>
       
     <delete id="remove" parameterType="string"  >
         delete from background where back_id = #{backId};

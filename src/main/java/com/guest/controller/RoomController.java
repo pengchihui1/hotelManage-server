@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guest.pojo.po.Background;
 import com.guest.pojo.po.BookMsg;
 import com.guest.pojo.po.CheckIn;
 import com.guest.pojo.po.CostType;
@@ -75,9 +76,9 @@ public class RoomController {
 	@PostMapping("/addRoom")
 	@ApiOperation(value = "添加/修改房间")
 	@ApiImplicitParams({
-			// @ApiImplicitParam(name = "Authorization", value = "后台管理员的token", required =
-			// true),
-			@ApiImplicitParam(name = "roomId", value = "房间id，如果要修改，填要修改的房间id", required = true),
+	// @ApiImplicitParam(name = "Authorization", value = "后台管理员的token", required =
+	// true),
+//			@ApiImplicitParam(name = "roomId", value = "房间id，如果要修改，填要修改的房间id", required = true),
 			@ApiImplicitParam(name = "rank", value = "房间级别，共A,B,C,D三个级别", required = false),
 			@ApiImplicitParam(name = "rent", value = "租金，单位是人民币元", required = false),
 			@ApiImplicitParam(name = "earnest", value = "入住定金，单位是人民币元", required = false),
@@ -88,27 +89,24 @@ public class RoomController {
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response addRoom(HttpServletRequest request, Room room) {
 //		logger.debug("debug");
-		String num = (String) request.getAttribute("num");
-		if (backgroundService.getById(num) != null) {
-			roomService.saveOrUpdate(room);
-			CostType costType1;
-			CostType costType2;
-			List<CostType> costTypes1 = costTypeService.getCostTypeByName(room.getRoomId() + "房间定金");
-			List<CostType> costTypes2 = costTypeService.getCostTypeByName(room.getRoomId() + "房间租金");
-			if (costTypes1 != null && costTypes1.size() > 0 && costTypes2 != null && costTypes2.size() > 0) {
-				costType1 = costTypes1.get(0);
-				costType2 = costTypes2.get(0);
-				costType1.setMoney((double) (0 - room.getEarnest()));
-				costType1.setMoney((double) room.getRent());
-			} else {
-				costType1 = new CostType(0, room.getRoomId() + "房间定金", 0 - room.getEarnest());
-				costType2 = new CostType(0, room.getRoomId() + "房间租金", room.getRent());
-			}
-			costTypeService.saveOrUpdate(costType1);
-			costTypeService.saveOrUpdate(costType2);
-			String token = jwtUtill.updateJwt(num);
-			return (new Response()).success(token);
-		}
+
+		roomService.saveOrUpdate(room);
+		CostType costType1;
+		CostType costType2;
+		List<CostType> costTypes1 = costTypeService.getCostTypeByName(room.getRoomId() + "房间定金");
+		List<CostType> costTypes2 = costTypeService.getCostTypeByName(room.getRoomId() + "房间租金");
+//		if (costTypes1 != null && costTypes1.size() > 0 && costTypes2 != null && costTypes2.size() > 0) {
+//			costType1 = costTypes1.get(0);
+//			costType2 = costTypes2.get(0);
+//			costType1.setMoney((double) (0 - room.getEarnest()));
+//			costType1.setMoney((double) room.getRent());
+//		} else {
+//			costType1 = new CostType(0, room.getRoomId() + "房间定金", 0 - room.getEarnest());
+//			costType2 = new CostType(0, room.getRoomId() + "房间租金", room.getRent());
+//		}
+//		costTypeService.saveOrUpdate(costType1);
+//		costTypeService.saveOrUpdate(costType2);
+
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
 
@@ -133,21 +131,32 @@ public class RoomController {
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
 
-	@GetMapping("/getAllRooms")
-	@ApiOperation(value = "获取所有的房间")
-//	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "后/前台管理员的token", required = true) })
-	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
-			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response getAllRooms(HttpServletRequest request) {
-		List<Room> list = roomService.findAll();
-		if (list != null && list.size() > 0) {
-			Map<String, Object> resultMap = new HashMap<>();
-			resultMap.put("list", list);
-			return new Response().success(request);
-		} else {
-			return new Response(ResponseMsg.NO_TARGET);
-		}
+//	@GetMapping("/getAllRooms")
+//	@ApiOperation(value = "获取所有的房间")
+////	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "后/前台管理员的token", required = true) })
+//	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
+//			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
+//	public Response findAlls() {
+//		List<Room> list = roomService.findAlls();
+//		logger.info("咨询", list);
+//		if (list != null && list.size() > 0) {
+//			Map<String, Object> resultMap = new HashMap<>();
+//			resultMap.put("list", list);
+//			return new Response().success(list);
+//		} else {
+//			return new Response(ResponseMsg.NO_TARGET);
+//		}
+//
+//	}
 
+	@GetMapping("/getAllRooms")
+	@ApiOperation(value = "后台管理员所有")
+	@ApiResponses({ @ApiResponse(code = 200, message = "OK", response = Background.class) })
+	public Response findAlls() {
+		List<Room> list = roomService.findAlls();
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("list", list);
+		return new Response().success(resultMap);
 	}
 
 	@GetMapping("/getRoomById")
@@ -170,42 +179,42 @@ public class RoomController {
 				// 获取当前的预定信息
 				List<BookMsg> bookMsgs = bookMsgService.getBookMsgByTime(now, later);
 				// 获取当前正在入住的信息
-				List<CheckIn> checkIns = checkInService.getValidCheckIns(now, now);
-				RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
-						room.getEarnest(), room.getMaxNum(), room.getPosition(), -1, "");
-				int f = 0;
-				for (CheckIn checkIn : checkIns) {
-					if (f == 1)
-						break;
-					if (checkIn.getRoomId().equals(roomMsg.getRoomId())) {
-						roomMsg.setState(1);
-						Timestamp fromTime = checkIn.getFromTime();
-						Timestamp toTime = checkIn.getToTime();
-						String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
-								+ toTime.toString().substring(0, 10).replace("-", ".");
-						roomMsg.setTime(time);
-						f = 1;
-					}
-				}
+//				List<CheckIn> checkIns = checkInService.getValidCheckIns(now, now);
+//				RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
+//						room.getEarnest(), room.getMaxNum(), room.getPosition(), -1, "");
+//				int f = 0;
+//				for (CheckIn checkIn : checkIns) {
+//					if (f == 1)
+//						break;
+//					if (checkIn.getRoomId().equals(roomMsg.getRoomId())) {
+//						roomMsg.setState(1);
+//						Timestamp fromTime = checkIn.getFromTime();
+//						Timestamp toTime = checkIn.getToTime();
+//						String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
+//								+ toTime.toString().substring(0, 10).replace("-", ".");
+//						roomMsg.setTime(time);
+//						f = 1;
+//					}
+//				}
 
-				for (BookMsg bookMsg : bookMsgs) {
-					if (f == 1)
-						break;
-					if (bookMsg.getResultRoom().equals(roomMsg.getRoomId())) {
-						roomMsg.setState(0);
-						Timestamp fromTime = bookMsg.getFromTime();
-						Timestamp toTime = bookMsg.getToTime();
-						String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
-								+ toTime.toString().substring(0, 10).replace("-", ".");
-						roomMsg.setTime(time);
-						f = 1;
-					}
-				}
-				Map<String, Object> resultMap = new HashMap<>();
-				String token = jwtUtill.updateJwt(num);
-				resultMap.put("roomMsg", roomMsg);
-				resultMap.put("token", token);
-				return (new Response()).success(resultMap);
+//				for (BookMsg bookMsg : bookMsgs) {
+//					if (f == 1)
+//						break;
+//					if (bookMsg.getResultRoom().equals(roomMsg.getRoomId())) {
+//						roomMsg.setState(0);
+//						Timestamp fromTime = bookMsg.getFromTime();
+//						Timestamp toTime = bookMsg.getToTime();
+//						String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
+//								+ toTime.toString().substring(0, 10).replace("-", ".");
+//						roomMsg.setTime(time);
+//						f = 1;
+//					}
+//				}
+//				Map<String, Object> resultMap = new HashMap<>();
+//				String token = jwtUtill.updateJwt(num);
+//				resultMap.put("roomMsg", roomMsg);
+//				resultMap.put("token", token);
+//				return (new Response()).success(resultMap);
 			}
 			return new Response(ResponseMsg.NO_TARGET);
 		}
@@ -284,17 +293,17 @@ public class RoomController {
 			// 获取当前正在入住的信息
 			List<CheckIn> checkIns = checkInService.getValidCheckIns(now, now);
 			List<RoomMsg> roomMsgs = new ArrayList<>();
-			for (CheckIn checkIn : checkIns) {
-				Room room = roomService.getById(checkIn.getRoomId());
-				RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
-						room.getEarnest(), room.getMaxNum(), room.getPosition(), 1, "");
-				Timestamp fromTime = checkIn.getFromTime();
-				Timestamp toTime = checkIn.getToTime();
-				String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
-						+ toTime.toString().substring(0, 10).replace("-", ".");
-				roomMsg.setTime(time);
-				roomMsgs.add(roomMsg);
-			}
+//			for (CheckIn checkIn : checkIns) {
+//				Room room = roomService.getById(checkIn.getRoomId());
+//				RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
+//						room.getEarnest(), room.getMaxNum(), room.getPosition(), 1, "");
+//				Timestamp fromTime = checkIn.getFromTime();
+//				Timestamp toTime = checkIn.getToTime();
+//				String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
+//						+ toTime.toString().substring(0, 10).replace("-", ".");
+//				roomMsg.setTime(time);
+//				roomMsgs.add(roomMsg);
+//			}
 			if (roomMsgs != null && roomMsgs.size() > 0) {
 				Map<String, Object> resultMap = new HashMap<>();
 				String token = jwtUtill.updateJwt(num);
@@ -325,17 +334,17 @@ public class RoomController {
 			List<RoomMsg> roomMsgs = new ArrayList<>();
 			// 获取当前的预定信息
 			List<BookMsg> bookMsgs = bookMsgService.getBookMsgByTime(now, now);
-			for (BookMsg bookMsg : bookMsgs) {
-				Room room = roomService.getById(bookMsg.getResultRoom());
-				RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
-						room.getEarnest(), room.getMaxNum(), room.getPosition(), 0, "");
-				Timestamp fromTime = bookMsg.getFromTime();
-				Timestamp toTime = bookMsg.getToTime();
-				String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
-						+ toTime.toString().substring(0, 10).replace("-", ".");
-				roomMsg.setTime(time);
-				roomMsgs.add(roomMsg);
-			}
+//			for (BookMsg bookMsg : bookMsgs) {
+//				Room room = roomService.getById(bookMsg.getResultRoom());
+//				RoomMsg roomMsg = new RoomMsg(room.getRoomId(), room.getSize(), room.getRank(), room.getRent(),
+//						room.getEarnest(), room.getMaxNum(), room.getPosition(), 0, "");
+//				Timestamp fromTime = bookMsg.getFromTime();
+//				Timestamp toTime = bookMsg.getToTime();
+//				String time = fromTime.toString().substring(0, 10).replace("-", ".") + "-"
+//						+ toTime.toString().substring(0, 10).replace("-", ".");
+//				roomMsg.setTime(time);
+//				roomMsgs.add(roomMsg);
+//			}
 			if (roomMsgs != null && roomMsgs.size() > 0) {
 				Map<String, Object> resultMap = new HashMap<>();
 				String token = jwtUtill.updateJwt(num);

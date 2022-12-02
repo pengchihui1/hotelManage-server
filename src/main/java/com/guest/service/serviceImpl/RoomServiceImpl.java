@@ -54,8 +54,8 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
 	}
 
 	@Override
-	public List<Room> findAll() {
-		List<Room> rooms = dao.findAll();
+	public List<Room> findAlls() {
+		List<Room> rooms = dao.findAlls();
 		return rooms;
 	}
 

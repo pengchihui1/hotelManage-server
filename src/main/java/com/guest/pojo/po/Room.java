@@ -64,38 +64,59 @@ public class Room extends Model<Room> {
 	}
 
 	public String getRoomId() {
-		// TODO Auto-generated method stub
-		return null;
+		return roomId;
 	}
 
-	public int getEarnest() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
 	}
 
-	public int getRent() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Double getSize() {
+		return size;
 	}
 
-	public Object getSize() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setSize(Double size) {
+		this.size = size;
 	}
 
-	public Object getRank() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getRank() {
+		return rank;
 	}
 
-	public Object getMaxNum() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setRank(String rank) {
+		this.rank = rank;
 	}
 
-	public Object getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+	public Double getRent() {
+		return rent;
+	}
+
+	public void setRent(Double rent) {
+		this.rent = rent;
+	}
+
+	public Double getEarnest() {
+		return earnest;
+	}
+
+	public void setEarnest(Double earnest) {
+		this.earnest = earnest;
+	}
+
+	public Integer getMaxNum() {
+		return maxNum;
+	}
+
+	public void setMaxNum(Integer maxNum) {
+		this.maxNum = maxNum;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 }

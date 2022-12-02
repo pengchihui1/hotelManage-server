@@ -22,7 +22,7 @@
         select * from room where rank = #{rank};
     </select>
     
-     <select id="findAll" resultMap="RoomResultMap">
+     <select id="findAlls" resultMap="RoomResultMap">
         select * from room
     </select>
     

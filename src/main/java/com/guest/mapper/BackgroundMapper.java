@@ -28,5 +28,7 @@ public interface BackgroundMapper extends BaseMapper<Background> {
 
 	int insert(Background background);
 
+	int update(Background background);
+
 	boolean remove(String backId);
 }

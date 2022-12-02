@@ -26,11 +26,6 @@ public class Front extends Model<Front> {
 	@TableId(value = "front_id")
 	private String frontId;
 
-	@Override
-	public String toString() {
-		return "Front [frontId=" + frontId + ", name=" + name + ", password=" + password + ", phone=" + phone + "]";
-	}
-
 	/**
 	 * 前台管理员的姓名
 	 */
@@ -41,15 +36,15 @@ public class Front extends Model<Front> {
 	 */
 	private String password;
 
-//	public Front() {
-//		super();
-//		// TODO Auto-generated constructor stub
-//	}
-
 	/**
 	 * 前台管理员的电话
 	 */
 	private String phone;
+
+	@Override
+	public String toString() {
+		return "Front [frontId=" + frontId + ", name=" + name + ", password=" + password + ", phone=" + phone + "]";
+	}
 
 	public String getFrontId() {
 		return frontId;
@@ -80,13 +75,6 @@ public class Front extends Model<Front> {
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Front(String frontId, String name, String password, String phone) {
-		this.frontId = frontId;
-		this.name = name;
-		this.password = password;
 		this.phone = phone;
 	}
 

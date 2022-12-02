@@ -24,7 +24,7 @@ public interface RoomMapper extends BaseMapper<Room> {
 	List<Room> getRoomsByType(String rank);
 
 //	获得所有及翻页 
-	List<Room> findAll();
+	List<Room> findAlls();
 
 //	单个查询
 	Room getById(String id);

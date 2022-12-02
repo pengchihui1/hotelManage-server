@@ -24,4 +24,10 @@ public interface CostTypeService extends IService<CostType> {
 	List<CostType> getAllCostType();
 
 	boolean removeByName(String name);
+
+	int insertCostType(CostType costType);
+
+	int updateCostType(CostType costType);
+
+	boolean removeByCostTypeId(String costTypeId);
 }
