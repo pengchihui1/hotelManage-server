@@ -49,19 +49,13 @@ public class CostServiceImpl extends ServiceImpl<CostMapper, Cost> implements Co
 	}
 
 	@Override
-	public void removeByRoomId(Object roomId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public int insertCost(Cost cost) {
 		// TODO Auto-generated method stub
 		return costMapper.insertCost(cost);
 	}
 
 	@Override
-	public Cost getCostById(Integer id) {
+	public Cost getCostById(int id) {
 		// TODO Auto-generated method stub
 		return costMapper.getCostById(id);
 	}

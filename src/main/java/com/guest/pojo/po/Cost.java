@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
  * @author 阿辉
  * @since 202-11-12
  */
+//消费项目对应的结算信息，比如早餐502房间定了3份100元，已付费
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,19 +27,13 @@ public class Cost extends Model<Cost> {
 	@TableId(value = "id")
 	private Integer id;
 
-	@Override
-	public String toString() {
-		return "Cost [id=" + id + ", costTypeId=" + costTypeId + ", roomId=" + roomId + ", num=" + num + ", state="
-				+ state + "]";
-	}
-
 	/**
 	 * 消费项目
 	 */
-	private Integer costTypeId;
+	private String costTypeId;
 
 	/**
-	 * 入住的id
+	 * 数量
 	 */
 	private String roomId;
 
@@ -52,14 +47,6 @@ public class Cost extends Model<Cost> {
 	 */
 	private Integer state;
 
-	public Cost(Integer id, Integer costTypeId, String roomId, Integer num, Integer state) {
-		this.id = id;
-		this.costTypeId = costTypeId;
-		this.roomId = roomId;
-		this.num = num;
-		this.state = state;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -68,11 +55,11 @@ public class Cost extends Model<Cost> {
 		this.id = id;
 	}
 
-	public Integer getCostTypeId() {
+	public String getCostTypeId() {
 		return costTypeId;
 	}
 
-	public void setCostTypeId(Integer costTypeId) {
+	public void setCostTypeId(String costTypeId) {
 		this.costTypeId = costTypeId;
 	}
 
@@ -100,12 +87,18 @@ public class Cost extends Model<Cost> {
 		this.state = state;
 	}
 
-	public Cost(int id2, int costTypeId2, String roomId2, int i, int j) {
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "Cost [id=" + id + ", costTypeId=" + costTypeId + ", roomId=" + roomId + ", num=" + num + ", state="
+				+ state + "]";
 	}
 
-	public Cost(int id2, int id3, Object resultRoom, int i, int j) {
-		// TODO Auto-generated constructor stub
+	public Cost(Integer id, String costTypeId, String roomId, Integer num, Integer state) {
+		this.id = id;
+		this.costTypeId = costTypeId;
+		this.roomId = roomId;
+		this.num = num;
+		this.state = state;
 	}
 
 }

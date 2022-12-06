@@ -22,15 +22,15 @@
 	    )
     </insert>
     
-    <update id="updateCostType">
+    <update id="updateCostType" parameterType="CostType">
 	    update cost_type
 	    set name = #{name}, 
-	    name = #{name}, 
-	    where id = #{costTypeId}
+	    money = #{money}
+	    where id = #{id}
 	</update>  
 	
 	  <delete id="removeByCostTypeId" parameterType="string">
-        delete from cost_type where id = #{costTypeId};
+        delete from cost_type where id = #{id};
     </delete> 
     
 </mapper>

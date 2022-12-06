@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guest.mapper.CostMapper">
-
+ <!--
+     <resultMap id="CostResultMap" type="com.guest.pojo.po.Cost">
+        <id column="id" property="id" />
+        <result column="cost_type_id" property="costTypeId" />
+        <result column="room_id" property="roomId" />
+        <result column="num" property="num" />
+        <result column="state" property="state" />
+    </resultMap>
+-->
     <select id="getCostByRoomId" resultType="Cost" parameterType="string">
         select * from cost where room_id = #{roomId};
     </select>
@@ -26,15 +34,22 @@
         delete from cost where room_id = #{id};
     </delete>
    
-	 <insert id="insertCost" parameterType="int">
-	   insert into (
-	    cost_type_id,room_id,num,state
-	    )VALUES (
-	      #{costTypeId},
+	 <insert id="insertCost" parameterType="Cost">
+	   insert into (cost_type_id,room_id,num,state) VALUES (
+ 		  #{costTypeId},
 	      #{roomId},
 	      #{num},
-	      #{state},
+	      #{state}
 	    )
 	</insert>
+	
+	<update id="saveOrUpdate" parameterType="Cost">
+        update cost
+	    set cost_type_id = #{costTypeId}, 
+	    room_id= #{roomId},
+	    num= #{num},
+	    state= #{state},
+    </update>
+	
    
 </mapper>

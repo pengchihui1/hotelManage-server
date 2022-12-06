@@ -1,20 +1,19 @@
 package com.guest.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guest.pojo.po.Cost;
@@ -54,22 +53,28 @@ public class CostController {
 	private CostTypeService costTypeService;
 	@Autowired
 	private JwtUtill jwtUtill;
+	private int insertCost;
 
 	@PostMapping("/addCost")
 	@ApiOperation(value = "添加/修改消费记录")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "填前台管理员的token", required = true),
-			@ApiImplicitParam(name = "id", value = "消费记录的id,如果是添加记录直接填0，如果是修改就填修改的id", required = true),
+	@ApiImplicitParams({
+//		@ApiImplicitParam(name = "Authorization", value = "填前台管理员的token", required = true),
+			@ApiImplicitParam(name = "id", value = "消费记录的id,如果是添加记录直接填0，如果是修改就填修改的id", required = false),
 			@ApiImplicitParam(name = "costTypeId", value = "消费类型的id", required = true),
-			@ApiImplicitParam(name = "roomId", value = "房间的id", required = true), })
+			@ApiImplicitParam(name = "roomId", value = "房间的id", required = true),
+			@ApiImplicitParam(name = "num", value = "消费类型的id", required = true) })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response addCost(HttpServletRequest request, int id, int costTypeId, String roomId) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			Cost cost = new Cost(id, costTypeId, roomId, 1, 0);
-			costService.saveOrUpdate(cost);
-			String token = jwtUtill.updateJwt(num);
-			return (new Response()).success(token);
+	public Response addCost(@RequestBody(required = false) Cost cost) {
+		logger.info("咨询123", cost);
+		Cost obj = costService.getCostById(cost.getId());
+		if (!ObjectUtils.isEmpty(obj)) {
+			boolean state = costService.saveOrUpdate(cost);
+			return new Response().success(state);
+		}
+		if (ObjectUtils.isEmpty(obj)) {
+			insertCost = costService.insertCost(cost);
+			return new Response().success(insertCost);
 		}
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
@@ -80,12 +85,10 @@ public class CostController {
 			@ApiImplicitParam(name = "id", value = "消费记录的id", required = true), })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response deleteCost(HttpServletRequest request, Integer id) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			costService.removeById(id);
-			String token = jwtUtill.updateJwt(num);
-			return (new Response()).success(token);
+	public Response removeByRoomId(String id) {
+		boolean state = costService.removeByRoomId(id);
+		if (state) {
+			return (new Response()).success(state);
 		}
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
@@ -97,21 +100,14 @@ public class CostController {
 			@ApiImplicitParam(name = "id", value = "消费记录的id", required = true) })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response getCostById(Integer id) {
-//		String num = (String) request.getAttribute("num");
+	public Response getCostById(int id) {
 		logger.info("对象：", id);
-//		if (frontService.getById(num) != null || frontService.getById(num) != null) {
-//			Cost cost = costService.getById(id);
-//			if (cost != null) {
-//				Map<String, Object> resultMap = new HashMap<>();
-//				String token = jwtUtill.updateJwt(num);
-//				resultMap.put("cost", cost);
-//				resultMap.put("token", token);
-//				return (new Response()).success(resultMap);
-//			}
-//			return new Response(ResponseMsg.NO_TARGET);
-//		}
-		logger.info("error：");
+		Cost cost = costService.getById(id);
+		if (cost != null) {
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("cost", cost);
+			return new Response().success(resultMap);
+		}
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
 
@@ -121,41 +117,18 @@ public class CostController {
 	 * @param request
 	 * @return
 	 */
-	@PostMapping("/getCostByRoomId")
+	@GetMapping("/getCostByRoomId")
 	@ApiOperation(value = "通过roomId查看当前入住客户的消费记录")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "Authorization", value = "填前台管理员的token", required = true),
 			@ApiImplicitParam(name = "roomId", value = "分配的房间的id", required = true), })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response getCostByRoomId(HttpServletRequest request, String roomId) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			List<Cost> costs = costService.getCostByRoomId(roomId);
-			List<Cost> costs1 = new ArrayList<>();
-			if (costs != null && costs.size() > 0) {
-				double hasSettle = 0;
-				double toll = 0;
-				for (Cost cost : costs) {
-					if (cost.getState() != 11) {
-						toll += costTypeService.getById(cost.getCostTypeId()).getMoney() * cost.getNum();
-						if (cost.getState() == 1) {
-							hasSettle += costTypeService.getById(cost.getCostTypeId()).getMoney() * cost.getNum();
-						}
-						costs1.add(cost);
-					}
-				}
-				double needSettle = toll - hasSettle;
-				Map<String, Object> resultMap = new HashMap<>();
-				String token = jwtUtill.updateJwt(num);
-				resultMap.put("costs1", costs1);
-				resultMap.put("toll", toll);
-				resultMap.put("hasSettle", hasSettle);
-				resultMap.put("needSettle", needSettle);
-				resultMap.put("token", token);
-				return (new Response()).success(resultMap);
-			}
-			return new Response(ResponseMsg.NO_TARGET);
+	public Response getCostByRoomId(String roomId) {
+		List<Cost> costs = costService.getCostByRoomId(roomId);
+		if (costs != null && costs.size() > 0) {
+			return (new Response()).success(costs);
 		}
+
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
 
@@ -171,15 +144,10 @@ public class CostController {
 			@ApiImplicitParam(name = "roomId", value = "房间的id", required = true), })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response settleCostByRoomId(HttpServletRequest request, String roomId) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			// 将未结算的设置成已结算的
-			costService.settleCostByRoomId(roomId);
-			String token = jwtUtill.updateJwt(num);
-			return (new Response()).success(token);
-		}
-		return new Response(ResponseMsg.ILLEGAL_OPERATION);
+	public Response settleCostByRoomId(@RequestBody(required = false) String roomId) {
+		// 将未结算的设置成已结算的
+		boolean state = costService.settleCostByRoomId(roomId);
+		return (new Response()).success(state);
 	}
 
 	/**
@@ -194,17 +162,12 @@ public class CostController {
 			@ApiImplicitParam(name = "id", value = "消费记录的id", required = true), })
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"), @ApiResponse(code = 40002, message = "数据不存在"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
-	public Response settleCostById(HttpServletRequest request, int id) {
-		String num = (String) request.getAttribute("num");
-		if (frontService.getById(num) != null) {
-			Cost cost = costService.getById(id);
-			if (cost != null) {
-				cost.setState(1);
-				costService.saveOrUpdate(cost);
-				String token = jwtUtill.updateJwt(num);
-				return (new Response()).success(token);
-			}
-			return new Response(ResponseMsg.NO_TARGET);
+	public Response settleCostById(int id) {
+		Cost cost = costService.getById(id);
+		if (cost != null) {
+			cost.setState(11);
+			boolean state = costService.saveOrUpdate(cost);
+			return new Response().success(state);
 		}
 		return new Response(ResponseMsg.ILLEGAL_OPERATION);
 	}
