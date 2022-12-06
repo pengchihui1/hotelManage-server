@@ -55,7 +55,7 @@ public class CostServiceImpl extends ServiceImpl<CostMapper, Cost> implements Co
 	}
 
 	@Override
-	public Cost getCostById(int id) {
+	public Cost getCostById(String id) {
 		// TODO Auto-generated method stub
 		return costMapper.getCostById(id);
 	}

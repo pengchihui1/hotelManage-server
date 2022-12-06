@@ -86,7 +86,7 @@ INSERT INTO `check_in` VALUES (17, '3', '0002', '2021-01-11 12:00:00', '2021-01-
 -- ----------------------------
 DROP TABLE IF EXISTS `cost`;
 CREATE TABLE `cost`  (
-  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '消费信息的id',
+  `id` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL COMMENT '消费信息的id',
   `cost_type_id` int(20) NOT NULL COMMENT '消费的名称',
   `room_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房间的id',
   `num` int(10) NOT NULL DEFAULT 1 COMMENT '数量',

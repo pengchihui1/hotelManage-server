@@ -31,5 +31,5 @@ public interface CostMapper extends BaseMapper<Cost> {
 
 	int insertCost(Cost cost);
 
-	Cost getCostById(int id);
+	Cost getCostById(String id);
 }

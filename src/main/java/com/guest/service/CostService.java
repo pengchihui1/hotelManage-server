@@ -32,5 +32,5 @@ public interface CostService extends IService<Cost> {
 
 	boolean saveOrUpdate(Cost cost);
 
-	Cost getCostById(int integer);
+	Cost getCostById(String id);
 }

@@ -25,12 +25,12 @@ public class Cost extends Model<Cost> {
 	 * 消费信息的id
 	 */
 	@TableId(value = "id")
-	private Integer id;
+	private String id;
 
 	/**
 	 * 消费项目
 	 */
-	private String costTypeId;
+	private int costTypeId;
 
 	/**
 	 * 数量
@@ -47,19 +47,19 @@ public class Cost extends Model<Cost> {
 	 */
 	private Integer state;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getCostTypeId() {
+	public int getCostTypeId() {
 		return costTypeId;
 	}
 
-	public void setCostTypeId(String costTypeId) {
+	public void setCostTypeId(int costTypeId) {
 		this.costTypeId = costTypeId;
 	}
 
@@ -93,7 +93,7 @@ public class Cost extends Model<Cost> {
 				+ state + "]";
 	}
 
-	public Cost(Integer id, String costTypeId, String roomId, Integer num, Integer state) {
+	public Cost(String id, int costTypeId, String roomId, Integer num, Integer state) {
 		this.id = id;
 		this.costTypeId = costTypeId;
 		this.roomId = roomId;

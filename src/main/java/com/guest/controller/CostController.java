@@ -66,17 +66,19 @@ public class CostController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "请求成功"),
 			@ApiResponse(code = 40104, message = "非法操作, 试图操作不属于自己的数据") })
 	public Response addCost(@RequestBody(required = false) Cost cost) {
-		logger.info("咨询123", cost);
-		Cost obj = costService.getCostById(cost.getId());
-		if (!ObjectUtils.isEmpty(obj)) {
-			boolean state = costService.saveOrUpdate(cost);
-			return new Response().success(state);
+
+		if (cost.getId() != null) {
+			Cost obj = costService.getCostById(cost.getId());
+			if (!ObjectUtils.isEmpty(obj)) {
+				boolean state = costService.saveOrUpdate(cost);
+				return new Response().success(state);
+			}
+			return new Response(ResponseMsg.ILLEGAL_OPERATION);
 		}
-		if (ObjectUtils.isEmpty(obj)) {
-			insertCost = costService.insertCost(cost);
-			return new Response().success(insertCost);
-		}
-		return new Response(ResponseMsg.ILLEGAL_OPERATION);
+
+		insertCost = costService.insertCost(cost);
+		logger.info("咨询123", cost.getId());
+		return new Response().success(insertCost);
 	}
 
 	@DeleteMapping("/deleteCost")
